@@ -10,8 +10,7 @@ public class Mecz {
     private Druzyna gosc;
     private int wynikGospodarz;
     private int wynikGosc;
-
-    private Map<Zawodnik, Integer> czasNaBoisku; // mapa zawodników i ich czasu w meczu
+    
     private Map<Zawodnik, Integer> kartki_zolte;
     private Map<Zawodnik, Integer> kartki_czerwone;
     private Map<Zawodnik, Integer> asysty;
