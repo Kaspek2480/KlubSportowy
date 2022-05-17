@@ -7,6 +7,11 @@ public class Druzyna extends Liga {
     private final String nazwa;
     private final List<Zawodnik> zawodnicy;
 
+
+    public static void main(String[] args) {
+
+    }
+
     public Druzyna(String nazwaKlubu, String nazwaLigi) {
         super(nazwaLigi);
         this.nazwa = nazwaKlubu;

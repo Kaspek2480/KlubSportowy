@@ -30,4 +30,9 @@ public class Main {
         }
 
     }
+
+    private static void menu() {
+        System.out.println("==============================");
+        System.out.println("1. Wyświetl ");
+    }
 }

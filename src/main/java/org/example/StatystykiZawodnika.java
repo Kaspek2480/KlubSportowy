@@ -9,7 +9,7 @@ public interface StatystykiZawodnika {
     int czasNaBoisku(Mecz mecz, Zawodnik zawodnik);
 
     //np 5 ostatnich meczow
-    int czasNaBoisku(List<Mecz> mecz, Zawodnik zawodnik);
+    int czasNaBoisku(List<Mecz> mecze, Zawodnik zawodnik);
 
     int strzeloneBramki(Mecz mecz, Zawodnik zawodnik);
 
