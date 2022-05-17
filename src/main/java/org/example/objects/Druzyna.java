@@ -3,7 +3,7 @@ package org.example.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Druzyna extends Liga {
+public class Druzyna {
     private final String nazwa;
     private final List<Zawodnik> zawodnicy;
 
@@ -12,8 +12,7 @@ public class Druzyna extends Liga {
 
     }
 
-    public Druzyna(String nazwaKlubu, String nazwaLigi) {
-        super(nazwaLigi);
+    public Druzyna(String nazwaKlubu) {
         this.nazwa = nazwaKlubu;
         this.zawodnicy = new ArrayList<>();
     }

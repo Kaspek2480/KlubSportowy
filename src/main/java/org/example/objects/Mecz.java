@@ -5,36 +5,23 @@ package org.example.objects;
 //MeczPilkiNoznej
 //MeczSiattkowki
 
-public class Mecz {
+import org.example.interfaces.MeczStats;
+
+public class Mecz implements MeczStats {
     private String nazwaMeczu;
     private String dataMeczu;
-
-    private Druzyna gospodarz;
-    private Druzyna gosc;
-    private int wynikGospodarz;
-    private int wynikGosc;
+    private Druzyna druzyna;
+    private int wynikMeczu;
 
     //4-5 statystyk na mecz
 
-    //FIXME czy wartosci moga byc od razu finalne (bez metod typu dodaj punkt itp)
 
 
-    public Mecz(String nazwaMeczu, String dataMeczu, Druzyna gospodarz, Druzyna gosc, int wynikGospodarz, int wynikGosc) {
+    public Mecz(String nazwaMeczu, String dataMeczu) {
         this.nazwaMeczu = nazwaMeczu;
         this.dataMeczu = dataMeczu;
-        this.gospodarz = gospodarz;
-        this.gosc = gosc;
-        this.wynikGospodarz = wynikGospodarz;
-        this.wynikGosc = wynikGosc;
     }
 
-    public int getWynikGospodarz() {
-        return wynikGospodarz;
-    }
-
-    public int getWynikGosc() {
-        return wynikGosc;
-    }
 
     public String getNazwaMeczu() {
         return nazwaMeczu;
@@ -45,4 +32,9 @@ public class Mecz {
     }
 
 
+    @Override
+    public int obliczWynikMeczu() {
+        System.err.println("Invoked on basic Mecz object");
+        return 0;
+    }
 }
