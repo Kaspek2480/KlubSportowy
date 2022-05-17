@@ -7,5 +7,5 @@ public class MeczPilkiNoznej{
     private Map<Zawodnik, Integer> asysty;
     private Map<Zawodnik, Integer> faule;
     private Map<Druzyna, Integer> podania;
-    private Map<Druzyna, Double> czasPosiadaniaPilki;
+    private Map<Druzyna, Integer> spalone;
 }
