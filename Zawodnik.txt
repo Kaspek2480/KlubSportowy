@@ -1,0 +1,13 @@
+{"imie":"Jan","nazwisko":"Kowalski","wiek":11}
+{"imie":"Mateusz","nazwisko":"Nowak","wiek":27}
+{"imie":"Kamil","nazwisko":"Wojtas","wiek":34}
+{"imie":"Łukasz","nazwisko":"Laskowski","wiek":22}
+{"imie":"Piotr","nazwisko":"Chrypko","wiek":23}
+{"imie":"Lech","nazwisko":"Komorowski","wiek":28}
+{"imie":"Kazimierz","nazwisko":"Chryńko","wiek":33}
+{"imie":"Grzegorz","nazwisko":"Mioduszewski","wiek":19}
+{"imie":"Paweł","nazwisko":"Tyborowski","wiek":18}
+{"imie":"Michał","nazwisko":"Kopeć","wiek":21}
+{"imie":"Bartosz","nazwisko":"Gierek","wiek":29}
+{"imie":"Krzysztof","nazwisko":"Opolski","wiek":36}
+{"imie":"Robert","nazwisko":"Prawandowski","wiek":34}

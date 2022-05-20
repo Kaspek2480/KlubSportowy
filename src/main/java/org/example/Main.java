@@ -21,7 +21,7 @@ public class Main {
     //FIXME gdzie przechowywac dane (statyczne listy obiektow?)
     //FIXME czy wartosci moga byc od razu finalne w przypadku gdy ladujemy dane [obiekty] (bez metod typu dodaj punkt itp)
     //FIXME czy w meczu muszą byc dwie druzyny czy prowadzimy statystyki tylko jednej druzyny (tej naszej z klubu)
-
+    //FIXME czy to ma dzialac na zasadzie przechowywania danych (tylko) czy dodac metody na zasadzie dodajPunkt dodajMecz itp
 
     private static void prepareSamples() {
         Gson gson = new Gson();
@@ -182,7 +182,13 @@ public class Main {
         System.out.println("3. Wyświetl listę zawodników");
         System.out.println("4. Wyświetl dokładne informacje o meczu");
         System.out.println("5. Usuń mecz z bazy");
-        System.out.println("6. Wyjdź z programu");
+        System.out.println("6. Dodaj zawodnika");
+        System.out.println("7. Dodaj mecz");
+        System.out.println("8. Dodaj drużynę");
+        System.out.println("9. Wyjdź z programu");
         System.out.println("==============================");
+        //TODO dodawanie zawodnika
+        //TODO dodawanie meczu
+        //TODO
     }
 }
