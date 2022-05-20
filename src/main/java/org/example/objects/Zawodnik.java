@@ -14,10 +14,6 @@ public class Zawodnik {
 
     @Override
     public String toString() {
-        return "Zawodnik{" +
-                "imie='" + imie + '\'' +
-                ", nazwisko='" + nazwisko + '\'' +
-                ", wiek=" + wiek +
-                '}';
+        return "Imię: " + imie + ", Nazwisko: " + nazwisko + ", Wiek: " + wiek;
     }
 }

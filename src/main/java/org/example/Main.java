@@ -2,12 +2,9 @@ package org.example;
 
 import com.google.gson.Gson;
 import org.example.objects.*;
+import org.example.utils.FileUtils;
 import org.example.utils.MiscUtils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -90,7 +87,7 @@ public class Main {
 
             for (Object object : objects) {
                 String json = gson.toJson(object);
-                appendToFile(json + "\n", object.getClass().getSimpleName() + ".txt");
+                FileUtils.appendToFile(json + "\n", object.getClass().getSimpleName() + ".txt");
             }
         }
     }
@@ -105,12 +102,13 @@ public class Main {
 
             switch (wybor) {
                 case 1:
-                    loadData();
+                    Storage.loadSampleData();
                     System.out.println("Załadowano przykładowe dane z pliku");
                     break;
                 case 2:
                     break;
                 case 3:
+                    Storage.displayAllPlayers();
                     break;
                 case 4:
                     break;
@@ -123,56 +121,6 @@ public class Main {
             }
         }
 
-    }
-
-    /***
-     * Metoda wczytująca dane testowe z pliku .json
-     * Deserializacja przyogtowanych danych do obiektów
-     */
-    private static void loadData() {
-        System.out.println("Loading data..");
-
-        List<String> druzyny = readFileToListString("samplesDruzyna.txt");
-        List<String> zawodnicy = readFileToListString("samplesZawodnik.txt");
-
-        if (druzyny == null || zawodnicy == null) {
-            System.out.println("Fatal error while loading data");
-            System.exit(0);
-        }
-
-        for (String druzyna : druzyny) {
-            System.out.println(druzyna);
-        }
-
-        for (String zawodnik : zawodnicy) {
-            System.out.println(zawodnik);
-        }
-
-    }
-
-    private static List<String> readFileToListString(String fileName) {
-        try {
-            File sampleFile = new File(fileName);
-            return Files.readAllLines(sampleFile.toPath());
-        } catch (IOException e) {
-            System.err.println("Error reading file due to: " + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private static void appendToFile(String line, String fileName) {
-        try {
-            if (!new File(fileName).exists()) {
-                new File(fileName).createNewFile();
-            }
-            FileWriter fileWriter = new FileWriter(fileName, true);
-            fileWriter.write(line);
-            fileWriter.close();
-        } catch (IOException e) {
-            System.err.println("Error writing to file due to: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
     private static void displayMenu() {

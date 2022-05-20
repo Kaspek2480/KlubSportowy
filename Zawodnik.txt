@@ -10,4 +10,11 @@
 {"imie":"Michał","nazwisko":"Kopeć","wiek":21}
 {"imie":"Bartosz","nazwisko":"Gierek","wiek":29}
 {"imie":"Krzysztof","nazwisko":"Opolski","wiek":36}
-{"imie":"Robert","nazwisko":"Prawandowski","wiek":34}
+{"imie":"Władysław","nazwisko":"Skała","wiek":34}
+{"imie":"Jędrzej","nazwisko":"Prawandowski","wiek":23}
+{"imie":"Hubert","nazwisko":"Prawandowski","wiek":24}
+{"imie":"Eugieniusz","nazwisko":"Zamojski","wiek":18}
+{"imie":"Darek","nazwisko":"Oświęcicki","wiek":17}
+{"imie":"Piotr","nazwisko":"Szeliga","wiek":30}
+{"imie":"Norman","nazwisko":"Parkowski","wiek":26}
+{"imie":"Damian","nazwisko":"Kwiatkowski","wiek":25}
