@@ -37,6 +37,12 @@ public class SampleGenerator {
         zawodnicy.add(new Zawodnik("Piotr", "Szeliga", 30));
         zawodnicy.add(new Zawodnik("Norman", "Parkowski", 26));
         zawodnicy.add(new Zawodnik("Damian", "Kwiatkowski", 25));
+        zawodnicy.add(new Zawodnik("Joseph", "Greenwood", 38));
+        zawodnicy.add(new Zawodnik("Kamil", "Śliwowski", 19));
+        zawodnicy.add(new Zawodnik("Teodor", "Czerczesow", 22));
+        zawodnicy.add(new Zawodnik("Marian", "Lutostański", 21));
+        zawodnicy.add(new Zawodnik("Leaonardo", "Karpio", 29));
+
 
         druzyny.add(new Druzyna("Legia Warszawa"));
         druzyny.add(new Druzyna("Wisła Kraków"));
@@ -53,9 +59,13 @@ public class SampleGenerator {
         druzyny.add(new Druzyna("Olimpia Elbląg"));
         druzyny.add(new Druzyna("Wigry Suwałki"));
         druzyny.add(new Druzyna("Hutnik Kraków"));
-        druzyny.add(new Druzyna("Znicz Pruszków"));
+        druzyny.add(new Druzyna("Raków Częstochowa"));
+        druzyny.add(new Druzyna("KS Śniadowo"));
+        druzyny.add(new Druzyna("Jagielonia Białystok"));
+        druzyny.add(new Druzyna("Stal Mielec"));
+        druzyny.add(new Druzyna("Warta Poznań"));
 
-        mecze.add(new Mecz("Nazwa meczu", "data"));
+        mecze.add(new Mecz("", "data"));
 
 
         for (Druzyna druzyna : druzyny) {
