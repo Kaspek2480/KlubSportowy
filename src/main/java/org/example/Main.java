@@ -3,6 +3,7 @@ package org.example;
 import org.example.objects.*;
 import org.example.utils.MiscUtils;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -109,11 +110,38 @@ public class Main {
                 }
                 //add match
                 case 8: {
-                    /*System.out.println("Podaj rodzaj meczu (np. MeczKoszykowki, MeczPilkiNoznej): ");
+                    System.out.println("Podaj rodzaj meczu (np. MeczKoszykowki, MeczPilkiNoznej): ");
                     String rodzajMeczu = scanner.nextLine();
                     System.out.println(rodzajMeczu);
 
+                    Object mecz = null;
+                    switch (rodzajMeczu) {
+
+
+                        case "MeczKoszykowki": {
+//                            mecz = new MeczKoszykowki();
+
+
+                        }
+                        case "MeczPilkiNoznej": {
+
+                            break;
+                        }
+                    }
+
+                    if (mecz == null) {
+                        System.out.println("Nie ma takiego meczu");
+                        break;
+                    }
+
+                    for (Field declaredField : mecz.getClass().getDeclaredFields()) {
+                        System.out.println("Podaj " + declaredField.getName() + ": ");
+                        String value = scanner.nextLine();
+//                        declaredField.set(mecz, value);
+                    }
+
                     try {
+                        Mecz.class.getName().replace(".Mecz", "");
                         Class<?> aClass = Class.forName("org.example.objects." + rodzajMeczu);
                         Object instance = aClass.newInstance();
 
@@ -126,7 +154,7 @@ public class Main {
                         System.out.println("Dodano mecz: " + instance.toString());
                     } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                         e.printStackTrace();
-                    }*/
+                    }
 
                     //TODO: zaimplementować dodawanie meczu
                     break;

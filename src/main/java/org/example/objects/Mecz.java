@@ -1,28 +1,22 @@
 package org.example.objects;
 
-//
-
-//MeczPilkiNoznej
-//MeczSiattkowki
 
 import org.example.interfaces.MeczStats;
 
 public class Mecz implements MeczStats {
-    private String nazwaMeczu;
-    private String dataMeczu;
+    private final String nazwaMeczu;
+    private final String dataMeczu;
 
-    private Druzyna druzyna;
-    private Druzyna druzyna2;
+    private final Druzyna druzyna1;
+    private final Druzyna druzyna2;
 
-    //4-5 statystyk na mecz
 
-    public Mecz(String dataMeczu, Druzyna druzyna, Druzyna druzyna2) {
+    public Mecz(String dataMeczu, Druzyna druzyna1, Druzyna druzyna2) {
         this.dataMeczu = dataMeczu;
-        this.druzyna = druzyna;
+        this.druzyna1 = druzyna1;
         this.druzyna2 = druzyna2;
-        this.nazwaMeczu = druzyna.getNazwa() + " - " + druzyna2.getNazwa();
+        this.nazwaMeczu = druzyna1.getNazwa() + " - " + druzyna2.getNazwa();
     }
-
 
     public String getNazwaMeczu() {
         return nazwaMeczu;
@@ -32,8 +26,8 @@ public class Mecz implements MeczStats {
         return dataMeczu;
     }
 
-    public Druzyna getDruzyna() {
-        return druzyna;
+    public Druzyna getDruzyna1() {
+        return druzyna1;
     }
 
     public Druzyna getDruzyna2() {

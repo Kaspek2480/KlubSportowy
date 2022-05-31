@@ -55,28 +55,26 @@ public class MeczKoszykowki extends Mecz {
 
     @Override
     public Druzyna pickWinner() {
-        return punkty.get(getDruzyna()) > punkty.get(getDruzyna2()) ? getDruzyna() : getDruzyna2();
+        return punkty.get(getDruzyna1()) > punkty.get(getDruzyna2()) ? getDruzyna1() : getDruzyna2();
     }
 
     @Override
     public String detailedStats() {
         String base = "\n" + this.getClass().getSimpleName() + " | " + super.detailedStats() + "\n\n";
-        StringBuilder sb = new StringBuilder(base);
-        sb.append("Drużyna 1: ").append(getDruzyna().getNazwa()).append("\n");
-        sb.append("Punkty: ").append(punkty.get(getDruzyna())).append("\n");
-        sb.append("Faule: ").append(faule.get(getDruzyna())).append("\n");
-        sb.append("Obrony: ").append(obrony.get(getDruzyna())).append("\n");
-        sb.append("Asysty: ").append(asysty.get(getDruzyna())).append("\n");
-        sb.append("Rzuty za trzy: ").append(rzutyZaTrzy.get(getDruzyna())).append("\n");
-        sb.append("\n");
-        sb.append("Drużyna 2: ").append(getDruzyna2().getNazwa()).append("\n");
-        sb.append("Punkty: ").append(punkty.get(getDruzyna2())).append("\n");
-        sb.append("Faule: ").append(faule.get(getDruzyna2())).append("\n");
-        sb.append("Obrony: ").append(obrony.get(getDruzyna2())).append("\n");
-        sb.append("Asysty: ").append(asysty.get(getDruzyna2())).append("\n");
-        sb.append("Rzuty za trzy: ").append(rzutyZaTrzy.get(getDruzyna2())).append("\n\n");
-        sb.append("Wygrała drużyna: ").append(pickWinner().getNazwa());
-        return sb.toString();
+        return base + "Drużyna 1: " + getDruzyna1().getNazwa() + "\n" +
+                "Punkty: " + punkty.get(getDruzyna1()) + "\n" +
+                "Faule: " + faule.get(getDruzyna1()) + "\n" +
+                "Obrony: " + obrony.get(getDruzyna1()) + "\n" +
+                "Asysty: " + asysty.get(getDruzyna1()) + "\n" +
+                "Rzuty za trzy: " + rzutyZaTrzy.get(getDruzyna1()) + "\n" +
+                "\n" +
+                "Drużyna 2: " + getDruzyna2().getNazwa() + "\n" +
+                "Punkty: " + punkty.get(getDruzyna2()) + "\n" +
+                "Faule: " + faule.get(getDruzyna2()) + "\n" +
+                "Obrony: " + obrony.get(getDruzyna2()) + "\n" +
+                "Asysty: " + asysty.get(getDruzyna2()) + "\n" +
+                "Rzuty za trzy: " + rzutyZaTrzy.get(getDruzyna2()) + "\n\n" +
+                "Wygrała drużyna: " + pickWinner().getNazwa();
 
     }
 }
