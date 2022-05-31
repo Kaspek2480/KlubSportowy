@@ -78,6 +78,12 @@ public class SampleGenerator {
         serialize(meczKoszykowki, meczSiatkowki, meczPilkiNoznej, meczTenisa, zawodnicy, druzyny);
     }
 
+    public static void prepareMecz() {
+        List<Mecz> mecze = new ArrayList<>();
+
+
+    }
+
     private static void serialize(List<?>... list) {
         Gson gson = new Gson();
         for (List<?> objects : list) {
