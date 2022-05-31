@@ -65,7 +65,6 @@ public class SampleGenerator {
         druzyny.add(new Druzyna("Stal Mielec"));
         druzyny.add(new Druzyna("Warta Poznań"));
 
-        mecze.add(new Mecz("", "data"));
 
 
         for (Druzyna druzyna : druzyny) {
@@ -90,7 +89,7 @@ public class SampleGenerator {
 
             for (Object object : objects) {
                 String json = gson.toJson(object);
-                FileUtils.appendToFile(json + "\n", object.getClass().getSimpleName() + ".txt");
+                FileUtils.appendToFile(json, object.getClass().getSimpleName() + ".txt");
             }
         }
     }

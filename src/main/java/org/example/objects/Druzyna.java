@@ -29,11 +29,16 @@ public class Druzyna {
         zawodnicy.add(zawodnik);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Klub{" +
                 "nazwa='" + nazwa + '\'' +
                 ", zawodnicy=" + zawodnicy +
                 '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return nazwa;
     }
 }

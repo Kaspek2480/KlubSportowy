@@ -14,7 +14,7 @@ public class FileUtils {
             return Files.readAllLines(sampleFile.toPath());
         } catch (IOException e) {
             System.err.println("Error reading file due to: " + e.getMessage());
-            e.printStackTrace();
+//            e.printStackTrace();
             return new ArrayList<>();
         }
     }
@@ -25,10 +25,22 @@ public class FileUtils {
                 new File(fileName).createNewFile();
             }
             FileWriter fileWriter = new FileWriter(fileName, true);
-            fileWriter.write(line);
+            fileWriter.write(line + "\n");
             fileWriter.close();
         } catch (IOException e) {
             System.err.println("Error writing to file due to: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeFile(String fileName) {
+        try {
+            File file = new File(fileName);
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            System.err.println("Error deleting file due to: " + e.getMessage());
             e.printStackTrace();
         }
     }

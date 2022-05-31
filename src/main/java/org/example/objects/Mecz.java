@@ -10,16 +10,17 @@ import org.example.interfaces.MeczStats;
 public class Mecz implements MeczStats {
     private String nazwaMeczu;
     private String dataMeczu;
+
     private Druzyna druzyna;
-    private int wynikMeczu;
+    private Druzyna druzyna2;
 
     //4-5 statystyk na mecz
 
-
-
-    public Mecz(String nazwaMeczu, String dataMeczu) {
-        this.nazwaMeczu = nazwaMeczu;
+    public Mecz(String dataMeczu, Druzyna druzyna, Druzyna druzyna2) {
         this.dataMeczu = dataMeczu;
+        this.druzyna = druzyna;
+        this.druzyna2 = druzyna2;
+        this.nazwaMeczu = druzyna.getNazwa() + " - " + druzyna2.getNazwa();
     }
 
 
@@ -31,10 +32,22 @@ public class Mecz implements MeczStats {
         return dataMeczu;
     }
 
+    public Druzyna getDruzyna() {
+        return druzyna;
+    }
+
+    public Druzyna getDruzyna2() {
+        return druzyna2;
+    }
 
     @Override
-    public int obliczWynikMeczu() {
+    public Druzyna pickWinner() {
         System.err.println("Invoked on basic Mecz object");
-        return 0;
+        return null;
+    }
+
+    @Override
+    public String detailedStats() {
+        return nazwaMeczu + " | " + dataMeczu;
     }
 }

@@ -1,5 +1,6 @@
 package org.example.utils;
 
+import org.example.objects.Druzyna;
 import org.example.objects.Zawodnik;
 
 import java.io.File;
@@ -19,12 +20,12 @@ public class MiscUtils {
         new File("Zawodnik.txt").delete();
     }
 
-    public static Map<Zawodnik, Integer> randomValuesOfZaowdnik(List<Zawodnik> zawodnicy) {
-        Map<Zawodnik, Integer> map = new HashMap<>();
-        for (Zawodnik zawodnik : zawodnicy) {
-            if (randInt(0, 2) == 1) continue;
-            map.put(zawodnik, randInt(0, 5));
+    public static Map<Druzyna, Integer> randomValuesOfDruzyny(List<Druzyna> zawodnicy) {
+        Map<Druzyna, Integer> map = new HashMap<>();
+        for (Druzyna druzyna : zawodnicy) {
+            map.put(druzyna, randInt(0, 5));
         }
+//        System.out.println(map);
         return map;
     }
 }

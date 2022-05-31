@@ -10,6 +10,7 @@ import org.example.utils.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,17 +36,17 @@ public class Storage {
         List<String> serializedMeczeLines = FileUtils.readFileToListString("Mecz.txt");
         List<String> serializedDruzynyLines = FileUtils.readFileToListString("Druzyna.txt");
 
-        for (int i = 0; i < serializedZawodnicyLines.size(); i++) {
+        for (int i = 1; i < serializedZawodnicyLines.size(); i++) {
             String serializedZawodnicyLine = serializedZawodnicyLines.get(i);
             zawodnicy.put(i, gson.fromJson(serializedZawodnicyLine, Zawodnik.class));
         }
 
-        for (int i = 0; i < serializedMeczeLines.size(); i++) {
+        for (int i = 1; i < serializedMeczeLines.size(); i++) {
             String serializedMeczeLine = serializedMeczeLines.get(i);
             mecze.put(i, gson.fromJson(serializedMeczeLine, Mecz.class));
         }
 
-        for (int i = 0; i < serializedDruzynyLines.size(); i++) {
+        for (int i = 1; i < serializedDruzynyLines.size(); i++) {
             String serializedDruzynyLine = serializedDruzynyLines.get(i);
             druzyny.put(i, gson.fromJson(serializedDruzynyLine, Druzyna.class));
         }
@@ -58,7 +59,70 @@ public class Storage {
 
     public static void displayAllPlayers() {
         for (Map.Entry<Integer, Zawodnik> entry : zawodnicy.entrySet()) {
-            System.out.println(entry.getKey() + ". " + entry.getValue());
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " w druzynach: " + listMemberTeams(entry.getValue()));
         }
+    }
+
+    public static List<Druzyna> listMemberTeams(Zawodnik zawodnik) {
+        List<Druzyna> list = new ArrayList<>();
+        druzyny.values().forEach(druzyna -> {
+            for (Zawodnik zawodnik1 : druzyna.getZawodnicy()) {
+                if (zawodnik.equals(zawodnik1)) {
+                    list.add(druzyna);
+                }
+            }
+        });
+        return list;
+    }
+
+    public static void saveDatabase() {
+        Gson gson = new Gson();
+        FileUtils.removeFile("Zawodnik.txt");
+        FileUtils.removeFile("Mecz.txt");
+        FileUtils.removeFile("Druzyna.txt");
+
+        for (Map.Entry<Integer, Zawodnik> entry : zawodnicy.entrySet()) {
+            FileUtils.appendToFile(gson.toJson(entry.getValue()), "Zawodnik.txt");
+        }
+        for (Map.Entry<Integer, Mecz> entry : mecze.entrySet()) {
+            FileUtils.appendToFile(gson.toJson(entry.getValue()), "Mecz.txt");
+        }
+        for (Map.Entry<Integer, Druzyna> entry : druzyny.entrySet()) {
+            FileUtils.appendToFile(gson.toJson(entry.getValue()), "Druzyna.txt");
+        }
+
+        System.out.println("Database saved");
+    }
+
+    public static void addPlayer(Zawodnik zawodnik) {
+        zawodnicy.put(zawodnicy.size(), zawodnik);
+    }
+
+    public static void addMatch(Mecz mecz) {
+        mecze.put(mecze.size(), mecz);
+    }
+
+    public static void addTeam(Druzyna druzyna) {
+        druzyny.put(druzyny.size(), druzyna);
+    }
+
+    public static Map<Integer, Zawodnik> getZawodnicy() {
+        return zawodnicy;
+    }
+
+    public static Map<Integer, Mecz> getMecze() {
+        return mecze;
+    }
+
+    public static Map<Integer, Druzyna> getDruzyny() {
+        return druzyny;
+    }
+
+    public static void removePlayer(int id) {
+        zawodnicy.remove(id);
+    }
+
+    public static void removeTeam(int id) {
+        druzyny.remove(id);
     }
 }
