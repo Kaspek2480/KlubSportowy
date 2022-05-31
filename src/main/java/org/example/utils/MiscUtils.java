@@ -20,12 +20,12 @@ public class MiscUtils {
         new File("Zawodnik.txt").delete();
     }
 
+
     public static Map<Druzyna, Integer> randomValuesOfDruzyny(List<Druzyna> zawodnicy) {
         Map<Druzyna, Integer> map = new HashMap<>();
         for (Druzyna druzyna : zawodnicy) {
             map.put(druzyna, randInt(0, 5));
         }
-//        System.out.println(map);
         return map;
     }
 }

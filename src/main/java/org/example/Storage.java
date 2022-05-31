@@ -63,6 +63,12 @@ public class Storage {
         }
     }
 
+    public static void displayAllTeams() {
+        for (Map.Entry<Integer, Druzyna> entry : druzyny.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
     public static List<Druzyna> listMemberTeams(Zawodnik zawodnik) {
         List<Druzyna> list = new ArrayList<>();
         druzyny.values().forEach(druzyna -> {

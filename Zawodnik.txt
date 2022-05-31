@@ -1,4 +1,3 @@
-{"imie":"Jan","nazwisko":"Kowalski","wiek":11}
 {"imie":"Mateusz","nazwisko":"Nowak","wiek":27}
 {"imie":"Kamil","nazwisko":"Wojtas","wiek":34}
 {"imie":"Łukasz","nazwisko":"Laskowski","wiek":22}

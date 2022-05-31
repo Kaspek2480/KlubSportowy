@@ -14,7 +14,6 @@ public class FileUtils {
             return Files.readAllLines(sampleFile.toPath());
         } catch (IOException e) {
             System.err.println("Error reading file due to: " + e.getMessage());
-//            e.printStackTrace();
             return new ArrayList<>();
         }
     }

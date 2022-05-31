@@ -4,15 +4,12 @@ import org.example.objects.*;
 import org.example.utils.MiscUtils;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        test();
+//        test();
         start();
     }
 
@@ -70,12 +67,7 @@ public class Main {
                     int numerMeczu = Integer.parseInt(scanner.nextLine());
 
                     Mecz mecz = Storage.getMecze().get(numerMeczu);
-
-                    if (mecz instanceof MeczKoszykowki) {
-                        ((MeczKoszykowki) mecz).detailedStats();
-                    } else if (mecz instanceof MeczPilkiNoznej) {
-                        ((MeczPilkiNoznej) mecz).detailedStats();
-                    }
+                    System.out.println(mecz.detailedStats());
                     break;
                 }
                 //delete player
@@ -96,11 +88,11 @@ public class Main {
                 }
                 //add player
                 case 7: {
-                    System.out.println("Podaj imię zawodnika, którego szukasz: ");
+                    System.out.println("Podaj imię zawodnika, którego chcesz dodać: ");
                     String imie = scanner.nextLine();
-                    System.out.println("Podaj nazwisko zawodnika, którego szukasz: ");
+                    System.out.println("Podaj nazwisko zawodnika, którego chcesz dodać: ");
                     String nazwisko = scanner.nextLine();
-                    System.out.println("Podaj wiek zawodnika, którego szukasz: ");
+                    System.out.println("Podaj wiek zawodnika, którego chcesz dodać: ");
                     int wiek = Integer.parseInt(scanner.nextLine());
 
                     Zawodnik zawodnik = new Zawodnik(imie, nazwisko, wiek);
@@ -110,53 +102,64 @@ public class Main {
                 }
                 //add match
                 case 8: {
+                    //
+                    Mecz mecz;
+
+                    System.out.println("Podaj datę meczu: ");
+                    String dataMeczu = scanner.nextLine();
+
+                    Storage.displayAllTeams();
+                    System.out.println("Podaj drużynę 1: ");
+                    Druzyna druzyna1 = Storage.getDruzyny().get(Integer.parseInt(scanner.nextLine()));
+                    System.out.println("Podaj drużynę 2: ");
+                    Druzyna druzyna2 = Storage.getDruzyny().get(Integer.parseInt(scanner.nextLine()));
+
                     System.out.println("Podaj rodzaj meczu (np. MeczKoszykowki, MeczPilkiNoznej): ");
-                    String rodzajMeczu = scanner.nextLine();
-                    System.out.println(rodzajMeczu);
-
-                    Object mecz = null;
-                    switch (rodzajMeczu) {
-
+                    switch (scanner.nextLine()) {
 
                         case "MeczKoszykowki": {
-//                            mecz = new MeczKoszykowki();
-
-
-                        }
-                        case "MeczPilkiNoznej": {
-
+                            mecz = new MeczKoszykowki(dataMeczu, druzyna1, druzyna2);
                             break;
                         }
-                    }
-
-                    if (mecz == null) {
-                        System.out.println("Nie ma takiego meczu");
-                        break;
-                    }
-
-                    for (Field declaredField : mecz.getClass().getDeclaredFields()) {
-                        System.out.println("Podaj " + declaredField.getName() + ": ");
-                        String value = scanner.nextLine();
-//                        declaredField.set(mecz, value);
+                        case "MeczPilkiNoznej": {
+                            mecz = new MeczPilkiNoznej(dataMeczu, druzyna1, druzyna2);
+                            break;
+                        }
+                        case "MeczTenisa": {
+                            mecz = new MeczTenisa(dataMeczu, druzyna1, druzyna2);
+                            break;
+                        }
+                        case "MeczSiatkowki": {
+                            mecz = new MeczSiatkowki(dataMeczu, druzyna1, druzyna2);
+                            break;
+                        }
+                        default: {
+                            System.out.println("Nie ma takiego typu meczu");
+                            System.exit(0xfffe7961);
+                            return;
+                        }
                     }
 
                     try {
-                        Mecz.class.getName().replace(".Mecz", "");
-                        Class<?> aClass = Class.forName("org.example.objects." + rodzajMeczu);
-                        Object instance = aClass.newInstance();
+                        for (Field declaredField : mecz.getClass().getDeclaredFields()) {
+                            Map<Druzyna, Integer> stat = new HashMap<>();
 
-                        for (Field declaredField : aClass.getDeclaredFields()) {
-                            System.out.println("Podaj wartość pola: " + declaredField.getName());
-                            String wartosc = scanner.nextLine();
+                            System.out.println("Podaj " + declaredField.getName() + " dla " + druzyna1.getNazwa() + ": ");
+                            stat.put(druzyna1, Integer.parseInt(scanner.nextLine()));
+
+                            System.out.println("Podaj " + declaredField.getName() + " dla " + druzyna2.getNazwa() + ": ");
+                            stat.put(druzyna2, Integer.parseInt(scanner.nextLine()));
+
+                            //setter for declared field is not accessible so we need to use reflection to set it
                             declaredField.setAccessible(true);
-                            declaredField.set(instance, wartosc);
+                            //set value of field to object of class Mecz or any of its subclasses (MeczKoszykowki, MeczPilkiNoznej, MeczSiatkowki, MeczTenisa)
+                            declaredField.set(mecz, stat);
                         }
-                        System.out.println("Dodano mecz: " + instance.toString());
-                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        System.out.println("Nie udało się dodać meczu z powodu błędu: " + e.getMessage());
                     }
 
-                    //TODO: zaimplementować dodawanie meczu
+                    Storage.addMatch(mecz);
                     break;
                 }
                 //add team
@@ -176,6 +179,7 @@ public class Main {
                     System.out.println("Podaj wynik meczu: ");
                     int wynik = Integer.parseInt(scanner.nextLine());
 
+
 //                    Mecz mecz = new Mecz(nazwaMeczu, dataMeczu);
 //                    Storage.addMatch(mecz);
 //                    System.out.println("Dodano mecz: " + mecz.getNazwaMeczu() + " " + mecz.getDataMeczu());
@@ -186,9 +190,12 @@ public class Main {
                     Storage.saveDatabase();
                     break;
                 }
-                default:
+                //if any other number is entered
+                default: {
                     System.out.println("Nie ma takiej opcji");
                     break;
+                }
+
             }
         }
 
@@ -208,5 +215,14 @@ public class Main {
         System.out.println("10. Zapisz bazę do pliku");
         System.out.println("11. Wyjdź z programu");
         System.out.println("==============================");
+    }
+
+    private static void displayLogo() {
+        System.out.println("\n" +
+                "   ██   ██ ██      ██    ██ ██████      ███████ ██████   ██████  ██████  ████████  ██████  ██     ██ ██    ██ \n" +
+                "   ██  ██  ██      ██    ██ ██   ██     ██      ██   ██ ██    ██ ██   ██    ██    ██    ██ ██     ██  ██  ██  \n" +
+                "   █████   ██      ██    ██ ██████      ███████ ██████  ██    ██ ██████     ██    ██    ██ ██  █  ██   ████   \n" +
+                "   ██  ██  ██      ██    ██ ██   ██          ██ ██      ██    ██ ██   ██    ██    ██    ██ ██ ███ ██    ██    \n" +
+                "   ██   ██ ███████  ██████  ██████      ███████ ██       ██████  ██   ██    ██     ██████   ███ ███     ██    \n");
     }
 }
