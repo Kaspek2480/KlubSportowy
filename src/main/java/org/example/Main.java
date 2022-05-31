@@ -202,6 +202,7 @@ public class Main {
     }
 
     private static void displayMenu() {
+        displayLogo();
         System.out.println("==============================");
         System.out.println("1. Załaduj przykładowe dane z pliku");
         System.out.println("2. Wyświetl listę meczy");
