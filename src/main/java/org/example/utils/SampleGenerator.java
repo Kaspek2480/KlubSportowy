@@ -41,6 +41,16 @@ public class SampleGenerator {
         zawodnicy.add(new Zawodnik("Teodor", "Czerczesow", 22));
         zawodnicy.add(new Zawodnik("Marian", "Lutostański", 21));
         zawodnicy.add(new Zawodnik("Leaonardo", "Karpio", 29));
+        zawodnicy.add(new Zawodnik("Rafał", "Nadalowski", 36));
+        zawodnicy.add(new Zawodnik("Janusz", "Pogorzelski", 28));
+        zawodnicy.add(new Zawodnik("Filip", "Kubski", 31));
+        zawodnicy.add(new Zawodnik("Wiktor", "Wojtaz", 32));
+        zawodnicy.add(new Zawodnik("Paweł", "Bieliński", 25));
+        zawodnicy.add(new Zawodnik("Krzyszfor", "Paruba", 23));
+        zawodnicy.add(new Zawodnik("Kamil", "Stochowski", 19));
+        zawodnicy.add(new Zawodnik("Piotr", "Żyłka", 22));
+        zawodnicy.add(new Zawodnik("Szymon", "Dardziński", 29));
+        zawodnicy.add(new Zawodnik("Jerzy", "Holibka", 21));
 
 
         druzyny.add(new Druzyna("Legia Warszawa"));
