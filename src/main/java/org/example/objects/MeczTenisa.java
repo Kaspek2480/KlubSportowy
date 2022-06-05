@@ -29,7 +29,7 @@ public class MeczTenisa extends Mecz {
         this.punkty = MiscUtils.randomValuesOfDruzyny(druzyny);
         this.asy = MiscUtils.randomValuesOfDruzyny(druzyny);
         this.pierwszySerwis = MiscUtils.randomValuesOfDruzyny(druzyny);
-        this.punktySerwisowe= MiscUtils.randomValuesOfDruzyny(druzyny);
+        this.punktySerwisowe = MiscUtils.randomValuesOfDruzyny(druzyny);
         this.zagraniaKonczace = MiscUtils.randomValuesOfDruzyny(druzyny);
     }
 
@@ -47,8 +47,9 @@ public class MeczTenisa extends Mecz {
     }
 
     @Override
-    public Druzyna pickWinner() {
-        return punkty.get(getDruzyna1()) > punkty.get(getDruzyna2()) ? getDruzyna1() : getDruzyna2();
+    public String pickWinner() {
+        if (punkty.get(getDruzyna1()) == punkty.get(getDruzyna2())) return "Remis";
+        return punkty.get(getDruzyna1()) > punkty.get(getDruzyna2()) ? getDruzyna1().getNazwa() : getDruzyna2().getNazwa();
     }
 
     @Override
@@ -67,7 +68,7 @@ public class MeczTenisa extends Mecz {
                 "Pierwszy Serwis: " + pierwszySerwis.get(getDruzyna2()) + "\n" +
                 "Punkty Serwisowe: " + punktySerwisowe.get(getDruzyna2()) + "\n" +
                 "Zagrania Konczace: " + zagraniaKonczace.get(getDruzyna2()) + "\n\n" +
-                "Wygrała drużyna: " + pickWinner().getNazwa();
+                "Wygrała drużyna: " + pickWinner();
 
     }
 }

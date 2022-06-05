@@ -34,14 +34,21 @@ public class Mecz implements MeczStats {
         return druzyna2;
     }
 
+    public String basicInfo() {
+        return nazwaMeczu + " | " + dataMeczu;
+    }
+
     @Override
-    public Druzyna pickWinner() {
+    public String pickWinner() {
         System.err.println("Invoked on basic Mecz object");
         return null;
     }
 
+
     @Override
     public String detailedStats() {
-        return nazwaMeczu + " | " + dataMeczu;
+        return basicInfo();
     }
+
+
 }

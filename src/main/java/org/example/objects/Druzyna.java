@@ -2,6 +2,7 @@ package org.example.objects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Druzyna {
     private final String nazwa;
@@ -29,13 +30,19 @@ public class Druzyna {
         zawodnicy.add(zawodnik);
     }
 
-    /*@Override
-    public String toString() {
-        return "Klub{" +
-                "nazwa='" + nazwa + '\'' +
-                ", zawodnicy=" + zawodnicy +
-                '}';
-    }*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Druzyna druzyna = (Druzyna) o;
+        return Objects.equals(nazwa, druzyna.nazwa);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazwa);
+    }
 
     @Override
     public String toString() {

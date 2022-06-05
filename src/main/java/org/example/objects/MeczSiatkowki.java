@@ -33,8 +33,9 @@ public class MeczSiatkowki extends Mecz {
     }
 
     @Override
-    public Druzyna pickWinner() {
-        return punkty.get(getDruzyna1()) > punkty.get(getDruzyna2()) ? getDruzyna1() : getDruzyna2();
+    public String pickWinner() {
+        if (punkty.get(getDruzyna1()) == punkty.get(getDruzyna2())) return "Remis";
+        return punkty.get(getDruzyna1()) > punkty.get(getDruzyna2()) ? getDruzyna1().getNazwa() : getDruzyna2().getNazwa();
     }
 
     @Override
@@ -53,7 +54,6 @@ public class MeczSiatkowki extends Mecz {
                 "Challenge: " + challenge.get(getDruzyna2()) + "\n" +
                 "Bledy Atakujac: " + bledyAtakujac.get(getDruzyna2()) + "\n" +
                 "Bledy Blokujac: " + bledyBlokujac.get(getDruzyna2()) + "\n\n" +
-                "Wygrała drużyna: " + pickWinner().getNazwa();
-
+                "Wygrała drużyna: " + pickWinner();
     }
 }

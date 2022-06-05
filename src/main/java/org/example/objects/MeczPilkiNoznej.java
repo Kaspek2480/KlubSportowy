@@ -53,8 +53,9 @@ public class MeczPilkiNoznej extends Mecz {
     }
 
     @Override
-    public Druzyna pickWinner() {
-        return gole.get(getDruzyna1()) > gole.get(getDruzyna2()) ? getDruzyna1() : getDruzyna2();
+    public String pickWinner() {
+        if (gole.get(getDruzyna1()) == gole.get(getDruzyna2())) return "Remis";
+        return gole.get(getDruzyna1()) > gole.get(getDruzyna2()) ? getDruzyna1().getNazwa() : getDruzyna2().getNazwa();
     }
 
     @Override
@@ -73,7 +74,6 @@ public class MeczPilkiNoznej extends Mecz {
                 "Faule: " + faule.get(getDruzyna2()) + "\n" +
                 "Podania: " + podania.get(getDruzyna2()) + "\n" +
                 "Spalone: " + spalone.get(getDruzyna2()) + "\n\n" +
-                "Wygrała drużyna: " + pickWinner().getNazwa();
-
+                "Wygrała drużyna: " + pickWinner();
     }
 }
