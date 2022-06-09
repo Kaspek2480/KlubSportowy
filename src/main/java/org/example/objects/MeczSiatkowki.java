@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class MeczSiatkowki extends Mecz {
-    private Map<Druzyna, Integer> punkty;
-    private Map<Druzyna, Integer> bloki;
-    private Map<Druzyna, Integer> challenge;
-    private Map<Druzyna, Integer> bledyAtakujac;
-    private Map<Druzyna, Integer> bledyBlokujac;
+    private final Map<Druzyna, Integer> punkty;
+    private final Map<Druzyna, Integer> bloki;
+    private final Map<Druzyna, Integer> challenge;
+    private final Map<Druzyna, Integer> bledyAtakujac;
+    private final Map<Druzyna, Integer> bledyBlokujac;
 
     public MeczSiatkowki(String dataMeczu, Druzyna druzyna1, Druzyna druzyna2, Map<Druzyna, Integer> punkty, Map<Druzyna, Integer> bloki, Map<Druzyna, Integer> challenge, Map<Druzyna, Integer> bledyAtakujac, Map<Druzyna, Integer> bledyBlokujac) {
         super(dataMeczu, druzyna1, druzyna2);

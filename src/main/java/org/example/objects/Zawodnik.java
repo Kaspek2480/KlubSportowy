@@ -13,12 +13,6 @@ public class Zawodnik {
         this.wiek = wiek;
     }
 
-
-    @Override
-    public String toString() {
-        return "Imię: " + imie + ", Nazwisko: " + nazwisko + ", Wiek: " + wiek;
-    }
-
     public String getImie() {
         return imie;
     }
@@ -29,6 +23,11 @@ public class Zawodnik {
 
     public int getWiek() {
         return wiek;
+    }
+
+    @Override
+    public String toString() {
+        return "Imię: " + imie + ", Nazwisko: " + nazwisko + ", Wiek: " + wiek;
     }
 
     @Override

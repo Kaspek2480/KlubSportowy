@@ -7,15 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 public class MeczKoszykowki extends Mecz {
-    private Map<Druzyna, Integer> punkty;
-    private Map<Druzyna, Integer> faule;
-    private Map<Druzyna, Integer> obrony;
-    private Map<Druzyna, Integer> asysty;
-    private Map<Druzyna, Integer> rzutyZaTrzy;
+    private final Map<Druzyna, Integer> punkty;
+    private final Map<Druzyna, Integer> faule;
+    private final Map<Druzyna, Integer> obrony;
+    private final Map<Druzyna, Integer> asysty;
+    private final Map<Druzyna, Integer> rzutyZaTrzy;
 
-
-    public MeczKoszykowki(String nazwaMeczu, String dataMeczu, Map<Druzyna, Integer> punkty, Map<Druzyna, Integer> faule, Map<Druzyna, Integer> obrony, Map<Druzyna, Integer> asysty, Map<Druzyna, Integer> rzutyZaTrzy) {
-        super(dataMeczu, null, null);
+    public MeczKoszykowki(String dataMeczu, Druzyna druzyna1, Druzyna druzyna2, Map<Druzyna, Integer> punkty, Map<Druzyna, Integer> faule, Map<Druzyna, Integer> obrony, Map<Druzyna, Integer> asysty, Map<Druzyna, Integer> rzutyZaTrzy) {
+        super(dataMeczu, druzyna1, druzyna2);
         this.punkty = punkty;
         this.faule = faule;
         this.obrony = obrony;

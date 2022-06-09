@@ -7,20 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class MeczPilkiNoznej extends Mecz {
-    private Map<Druzyna, Integer> gole;
-    private Map<Druzyna, Integer> asysty;
-    private Map<Druzyna, Integer> faule;
-    private Map<Druzyna, Integer> podania;
-    private Map<Druzyna, Integer> spalone;
-
-    public MeczPilkiNoznej(String nazwaMeczu, String dataMeczu, Map<Druzyna, Integer> gole, Map<Druzyna, Integer> asysty, Map<Druzyna, Integer> faule, Map<Druzyna, Integer> podania, Map<Druzyna, Integer> spalone) {
-        super(dataMeczu, null, null);
-        this.gole = gole;
-        this.asysty = asysty;
-        this.faule = faule;
-        this.podania = podania;
-        this.spalone = spalone;
-    }
+    private final Map<Druzyna, Integer> gole;
+    private final Map<Druzyna, Integer> asysty;
+    private final Map<Druzyna, Integer> faule;
+    private final Map<Druzyna, Integer> podania;
+    private final Map<Druzyna, Integer> spalone;
 
     public MeczPilkiNoznej(String dataMeczu, Druzyna druzyna1, Druzyna druzyna2) {
         super(dataMeczu, druzyna1, druzyna2);

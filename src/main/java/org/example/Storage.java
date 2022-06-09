@@ -1,11 +1,15 @@
 package org.example;
 
 import com.google.gson.Gson;
-import org.example.objects.*;
+import org.example.objects.Druzyna;
+import org.example.objects.Mecz;
+import org.example.objects.Zawodnik;
 import org.example.utils.FileUtils;
 import org.example.utils.MiscUtils;
 import org.example.utils.SampleGenerator;
+import org.example.utils.SerializeUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,47 +35,31 @@ public class Storage {
         List<String> serializedZawodnicyLines = FileUtils.readFileToListString("Zawodnik.txt");
         List<String> serializedDruzynyLines = FileUtils.readFileToListString("Druzyna.txt");
 
-       /* List<String> serializedMeczKoszykowki = FileUtils.readFileToListString("MeczKoszykowki.txt");
-        List<String> serializedMeczPilkiNoznej = FileUtils.readFileToListString("MeczPilkiNoznej.txt");
-        List<String> serializedMMeczSiatkowki = FileUtils.readFileToListString("MeczSiatkowki.txt");
-        List<String> serializedMeczTenisa = FileUtils.readFileToListString("MeczTenisa.txt");*/
-
         for (int i = 1; i < serializedZawodnicyLines.size(); i++) {
             String serializedZawodnicyLine = serializedZawodnicyLines.get(i);
-            zawodnicy.put(i, gson.fromJson(serializedZawodnicyLine, Zawodnik.class));
+            zawodnicy.put(i, SerializeUtil.deserialize(serializedZawodnicyLine, Zawodnik.class));
         }
 
         for (int i = 1; i < serializedDruzynyLines.size(); i++) {
             String serializedDruzynyLine = serializedDruzynyLines.get(i);
-            druzyny.put(i, gson.fromJson(serializedDruzynyLine, Druzyna.class));
+            druzyny.put(i, SerializeUtil.deserialize(serializedDruzynyLine, Druzyna.class));
         }
 
-       /* for (int i = 0; i < serializedMeczKoszykowki.size(); i++) {
-            String serializedMeczKoszykowkiLine = serializedMeczKoszykowki.get(i);
-            System.out.println(serializedMeczKoszykowkiLine);
-            mecze.put(i, gson.fromJson(serializedMeczKoszykowkiLine, MeczKoszykowki.class));
+        File fileMecz = new File("Mecz.txt");
+        if (fileMecz.exists()) {
+            List<String> serializedMeczeLines = FileUtils.readFileToListString("Mecz.txt");
+            for (int i = 1; i < serializedMeczeLines.size(); i++) {
+                String serializedMeczeLine = serializedMeczeLines.get(i);
+                mecze.put(i, SerializeUtil.deserialize(serializedMeczeLine, Mecz.class));
+            }
+        } else {
+            SampleGenerator.prepareMecz();
         }
-
-        for (int i = 0; i < serializedMeczPilkiNoznej.size(); i++) {
-            String serializedMeczPilkiNoznejLine = serializedMeczPilkiNoznej.get(i);
-            mecze.put(i, gson.fromJson(serializedMeczPilkiNoznejLine, MeczPilkiNoznej.class));
-        }
-
-        for (int i = 0; i < serializedMMeczSiatkowki.size(); i++) {
-            String serializedMMeczSiatkowkiLine = serializedMMeczSiatkowki.get(i);
-            mecze.put(i, gson.fromJson(serializedMMeczSiatkowkiLine, MeczSiatkowki.class));
-        }
-
-        for (int i = 0; i < serializedMeczTenisa.size(); i++) {
-            String serializedMeczTenisaLine = serializedMeczTenisa.get(i);
-            mecze.put(i, gson.fromJson(serializedMeczTenisaLine, MeczTenisa.class));
-        }*/
 
 
         System.out.println("Loaded " + zawodnicy.size() + " zawodników");
-//        System.out.println("Loaded " + mecze.size() + " meczy");
         System.out.println("Loaded " + druzyny.size() + " drużyn");
-        SampleGenerator.prepareMecz();
+        System.out.println("Loaded " + mecze.size() + " meczy");
 
     }
 
@@ -106,13 +94,13 @@ public class Storage {
         FileUtils.removeFile("Druzyna.txt");
 
         for (Map.Entry<Integer, Zawodnik> entry : zawodnicy.entrySet()) {
-            FileUtils.appendToFile(gson.toJson(entry.getValue()), "Zawodnik.txt");
+            FileUtils.appendToFile(SerializeUtil.serialize(entry.getValue()), "Zawodnik.txt");
         }
         for (Map.Entry<Integer, Mecz> entry : mecze.entrySet()) {
-            FileUtils.appendToFile(gson.toJson(entry.getValue()), "Mecz.txt");
+            FileUtils.appendToFile(SerializeUtil.serialize(entry.getValue()), "Mecz.txt");
         }
         for (Map.Entry<Integer, Druzyna> entry : druzyny.entrySet()) {
-            FileUtils.appendToFile(gson.toJson(entry.getValue()), "Druzyna.txt");
+            FileUtils.appendToFile(SerializeUtil.serialize(entry.getValue()), "Druzyna.txt");
         }
 
         System.out.println("Database saved");
@@ -146,14 +134,13 @@ public class Storage {
         return druzyny;
     }
 
-    public static void removePlayer(int id) throws GeneralException {
-        //TODO if player not exists
-        if (!zawodnicy.containsKey(id)) throw new GeneralException("Zawodnik o podanym id nie istnieje");
+    public static void removePlayer(int id) throws BladProgramu {
+        if (!zawodnicy.containsKey(id)) throw new BladProgramu("Zawodnik o podanym id nie istnieje");
         zawodnicy.remove(id);
     }
 
-    public static void removeTeam(int id) throws GeneralException {
-        if (!druzyny.containsKey(id)) throw new GeneralException("Drużyna o podanym id nie istnieje");
+    public static void removeTeam(int id) throws BladProgramu {
+        if (!druzyny.containsKey(id)) throw new BladProgramu("Drużyna o podanym id nie istnieje");
         druzyny.remove(id);
     }
 }

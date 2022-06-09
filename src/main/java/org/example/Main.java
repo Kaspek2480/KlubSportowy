@@ -1,30 +1,23 @@
 package org.example;
 
 import org.example.objects.*;
+import org.example.utils.SampleGenerator;
+import org.example.utils.SerializeUtil;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class Main {
 
     public static void main(String[] args) {
-//        test();
+//        Storage.loadSampleData();
+//        Storage.saveDatabase();
         start();
-    }
-
-    public static void test() {
-
-        /*//get random Druzyna from storage
-        Druzyna d = Storage.getDruzyny().get(MiscUtils.randInt(0, Storage.getDruzyny().size() - 1));
-        Druzyna d2 = Storage.getDruzyny().get(MiscUtils.randInt(0, Storage.getDruzyny().size() - 1));
-
-        MeczKoszykowki mecz = new MeczKoszykowki("12.07.2020 20:00", d, d2);
-        Storage.addMatch(mecz);
-
-        String s = mecz.detailedStats();
-        System.out.println(s);*/
     }
 
     private static void start() {
@@ -124,7 +117,7 @@ public class Main {
                         System.out.println("Podaj wiek zawodnika, którego chcesz dodać: ");
                         int wiek = Integer.parseInt(scanner.nextLine());
 
-                        if (wiek < 16) throw new GeneralException("Zawodnik musi mieć więcej niż 16 lat");
+                        if (wiek < 16) throw new BladProgramu("Zawodnik musi mieć więcej niż 16 lat");
 
                         Zawodnik zawodnik = new Zawodnik(imie, nazwisko, wiek);
                         Storage.addPlayer(zawodnik);
@@ -133,7 +126,6 @@ public class Main {
                     }
                     //add match
                     case 8: {
-                        //
                         Mecz mecz;
 
                         System.out.println("Podaj datę meczu: ");
@@ -145,7 +137,7 @@ public class Main {
                         System.out.println("Podaj drużynę 2: ");
                         Druzyna druzyna2 = Storage.getDruzyny().get(Integer.parseInt(scanner.nextLine()));
 
-                        if (druzyna1.equals(druzyna2)) throw new GeneralException("Drużyny nie mogą być takie same");
+                        if (druzyna1.equals(druzyna2)) throw new BladProgramu("Drużyny nie mogą być takie same");
 
                         System.out.println("Podaj rodzaj meczu (np. MeczKoszykowki, MeczPilkiNoznej, MeczSiatkowki, MeczTenisa): ");
                         switch (scanner.nextLine()) {
@@ -177,12 +169,12 @@ public class Main {
 
                                 System.out.println("Podaj " + declaredField.getName() + " dla " + druzyna1.getNazwa() + ": ");
                                 int i = Integer.parseInt(scanner.nextLine());
-                                if (i < 0) throw new GeneralException("Liczba nie może być ujemna");
+                                if (i < 0) throw new BladProgramu("Liczba nie może być ujemna");
                                 stat.put(druzyna1, i);
 
                                 System.out.println("Podaj " + declaredField.getName() + " dla " + druzyna2.getNazwa() + ": ");
                                 i = Integer.parseInt(scanner.nextLine());
-                                if (i < 0) throw new GeneralException("Liczba nie może być ujemna");
+                                if (i < 0) throw new BladProgramu("Liczba nie może być ujemna");
                                 stat.put(druzyna2, i);
 
                                 //setter for declared field is not accessible so we need to use reflection to set it
@@ -218,7 +210,7 @@ public class Main {
 
                         Druzyna druzyna = Storage.getDruzyny().get(id);
                         if (druzyna == null) {
-                            throw new GeneralException("Nie ma takiej drużyny");
+                            throw new BladProgramu("Nie ma takiej drużyny");
                         }
 
                         boolean manage = true;
@@ -227,21 +219,19 @@ public class Main {
                             System.out.println("==============================");
                             System.out.println("1. Dodaj zawodnika");
                             System.out.println("2. Usuń zawodnika");
-                            System.out.println("3. Zakończ zarządzanie drużyną");
+                            System.out.println("3. Wyświetl listę zawodników");
+                            System.out.println("4. Zakończ zarządzanie drużyną");
                             System.out.println("==============================");
 
                             int choice = Integer.parseInt(scanner.nextLine());
                             switch (choice) {
                                 case 1: {
-                                    for (Map.Entry<Integer, Zawodnik> entry : Storage.getZawodnicy().entrySet()) {
-                                        System.out.println(entry.getKey() + ": " + entry.getValue().getImie() + " " + entry.getValue().getNazwisko());
-                                    }
-                                    System.out.println("Podaj id zawodnika do usunięcia: ");
+                                    System.out.println("Podaj id zawodnika do dodania: ");
                                     id = Integer.parseInt(scanner.nextLine());
 
                                     Zawodnik zawodnik = Storage.getZawodnicy().get(id);
                                     if (zawodnik == null) {
-                                        throw new GeneralException("Nie ma takiego zawodnika");
+                                        throw new BladProgramu("Nie ma takiego zawodnika");
                                     }
 
                                     druzyna.getZawodnicy().add(zawodnik);
@@ -263,7 +253,7 @@ public class Main {
 
                                     Zawodnik zawodnik = druzyna.getZawodnicy().get(id - 1);
                                     if (zawodnik == null) {
-                                        throw new GeneralException("Nie ma takiego zawodnika");
+                                        throw new BladProgramu("Nie ma takiego zawodnika");
                                     }
 
                                     druzyna.getZawodnicy().remove(zawodnik);
@@ -272,6 +262,14 @@ public class Main {
                                     break;
                                 }
                                 case 3: {
+                                    System.out.println();
+                                    for (int i = 0; i < druzyna.getZawodnicy().size(); i++) {
+                                        System.out.println((i + 1) + ": " + druzyna.getZawodnicy().get(i).getImie() + " " + druzyna.getZawodnicy().get(i).getNazwisko());
+                                    }
+                                    System.out.println();
+                                    break;
+                                }
+                                case 4: {
                                     manage = false;
                                     break;
                                 }
@@ -285,13 +283,20 @@ public class Main {
                         Storage.saveDatabase();
                         break;
                     }
+
+                    case 12: {
+                        System.out.println("Dziękujemy za skorzystanie z programu!");
+                        System.exit(0);
+                        break;
+                    }
+
                     //if any other number is entered
                     default: {
-                        throw new GeneralException("Niepoprawny wybór, spróbuj ponownie");
+                        throw new BladProgramu("Niepoprawny wybór, spróbuj ponownie");
                     }
 
                 }
-            } catch (GeneralException e) {
+            } catch (BladProgramu e) {
                 System.err.println("Wystąpił błąd podczas wykonywania programu, operacja została przerwana z powodu: " + e.getMessage());
                 try {
                     Thread.sleep(2000);
@@ -330,5 +335,23 @@ public class Main {
                 "   █████   ██      ██    ██ ██████      ███████ ██████  ██    ██ ██████     ██    ██    ██ ██  █  ██   ████   \n" +
                 "   ██  ██  ██      ██    ██ ██   ██          ██ ██      ██    ██ ██   ██    ██    ██    ██ ██ ███ ██    ██    \n" +
                 "   ██   ██ ███████  ██████  ██████      ███████ ██       ██████  ██   ██    ██     ██████   ███ ███     ██    \n");
+    }
+
+
+    @Test
+    public void sprawdzanieZwyciezcy() {
+        Druzyna druzyna1 = new Druzyna("Drużyna 1");
+        Druzyna druzyna2 = new Druzyna("Drużyna 2");
+
+        Zawodnik zawodnik1 = new Zawodnik("Jan", "Kowalski", 25);
+        Zawodnik zawodnik2 = new Zawodnik("Dawid", "Kowalski", 20);
+
+        druzyna1.dodajZawodnika(zawodnik1);
+        druzyna2.dodajZawodnika(zawodnik2);
+
+        MeczTenisa meczTenisa = new MeczTenisa("Data", druzyna1, druzyna2, 1, 2);
+
+        //zwyciezca druzyna 2 | zmień drużynę podczas testow aby pokazac ze test się nie powiedzie
+        assertEquals(druzyna2.getNazwa(), meczTenisa.pickWinner());
     }
 }

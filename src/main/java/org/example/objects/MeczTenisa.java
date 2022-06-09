@@ -3,24 +3,40 @@ package org.example.objects;
 import org.example.utils.MiscUtils;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MeczTenisa extends Mecz {
-    private Map<Druzyna, Integer> punkty;
-    private Map<Druzyna, Integer> asy;
-    private Map<Druzyna, Integer> pierwszySerwis;
-    private Map<Druzyna, Integer> punktySerwisowe;
-    private Map<Druzyna, Integer> zagraniaKonczace;
+    private final Map<Druzyna, Integer> punkty;
+    private final Map<Druzyna, Integer> asy;
+    private final Map<Druzyna, Integer> pierwszySerwis;
+    private final Map<Druzyna, Integer> punktySerwisowe;
+    private final Map<Druzyna, Integer> zagraniaKonczace;
 
 
-    public MeczTenisa(String nazwaMeczu, String dataMeczu, Map<Druzyna, Integer> punkty, Map<Druzyna, Integer> asy, Map<Druzyna, Integer> pierwszySerwis, Map<Druzyna, Integer> punktySerwisowe, Map<Druzyna, Integer> zagraniaKonczace) {
-        super(dataMeczu, null, null);
+    public MeczTenisa(String dataMeczu, Druzyna druzyna1, Druzyna druzyna2, Map<Druzyna, Integer> punkty, Map<Druzyna, Integer> asy, Map<Druzyna, Integer> pierwszySerwis, Map<Druzyna, Integer> punktySerwisowe, Map<Druzyna, Integer> zagraniaKonczace) {
+        super(dataMeczu, druzyna1, druzyna2);
         this.punkty = punkty;
         this.asy = asy;
         this.pierwszySerwis = pierwszySerwis;
         this.punktySerwisowe = punktySerwisowe;
         this.zagraniaKonczace = zagraniaKonczace;
+    }
+
+    //konstruktor dla testow
+    public MeczTenisa(String nazwa, Druzyna druzyna, Druzyna druzyna2, int pktDruzyna1, int pktDruzyna2) {
+        super(nazwa, druzyna, druzyna2);
+        List<Druzyna> druzyny = Arrays.asList(druzyna, druzyna2);
+        Map<Druzyna, Integer> punkty = new HashMap<>();
+        punkty.put(druzyna, pktDruzyna1);
+        punkty.put(druzyna2, pktDruzyna2);
+
+        this.punkty = punkty;
+        this.asy = MiscUtils.randomValuesOfDruzyny(druzyny);
+        this.pierwszySerwis = MiscUtils.randomValuesOfDruzyny(druzyny);
+        this.punktySerwisowe = MiscUtils.randomValuesOfDruzyny(druzyny);
+        this.zagraniaKonczace = MiscUtils.randomValuesOfDruzyny(druzyny);
     }
 
     public MeczTenisa(String dataMeczu, Druzyna druzyna1, Druzyna druzyna2) {

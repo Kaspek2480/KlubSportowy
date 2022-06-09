@@ -7,7 +7,6 @@ import org.example.objects.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("DuplicatedCode")
 public class SampleGenerator {
 
     public static void prepareSamples() {
@@ -102,7 +101,8 @@ public class SampleGenerator {
         }
 
 
-        serialize(druzyny);
+//        serialize(druzyny);
+        serialize(zawodnicy, druzyny);
     }
 
     public static void prepareMecz() {
@@ -144,8 +144,6 @@ public class SampleGenerator {
                 }
             }
             mecze.add(mecz);
-//            MeczKoszykowki mecz = new MeczKoszykowki("12.07.2020 20:00", d, d2);
-//            Storage.addMatch(mecz);
         }
         Storage.getMecze().clear();
         mecze.forEach(Storage::addMatch);
@@ -153,23 +151,13 @@ public class SampleGenerator {
 
     }
 
-    public static void main(String[] args) {
-        prepareSamples();
-//       Storage.loadSampleData();
-//        for (Mecz value : Storage.getMecze().values()) {
-//            System.out.println(value.getClass().getSimpleName() + " " + value.basicInfo());
-//        }
-
-//        prepareMecz();
-//        prepareSamples();
-    }
 
     private static void serialize(List<?>... list) {
         Gson gson = new Gson();
         for (List<?> objects : list) {
             System.out.println(objects.getClass().getSimpleName() + " " + objects.size());
             for (Object object : objects) {
-                String json = gson.toJson(object);
+                String json = SerializeUtil.serialize(object);
                 FileUtils.appendToFile(json, object.getClass().getSimpleName() + ".txt");
             }
         }

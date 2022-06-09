@@ -1,9 +1,7 @@
 package org.example.utils;
 
 import org.example.objects.Druzyna;
-import org.example.objects.Zawodnik;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +12,6 @@ public class MiscUtils {
         return (int) (Math.random() * (max - min) + min);
     }
 
-
-    public static void clearSamples() {
-        new File("Druzyna.txt").delete();
-        new File("Zawodnik.txt").delete();
-    }
 
 
     public static Map<Druzyna, Integer> randomValuesOfDruzyny(List<Druzyna> zawodnicy) {

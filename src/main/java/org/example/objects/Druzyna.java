@@ -8,11 +8,6 @@ public class Druzyna {
     private final String nazwa;
     private final List<Zawodnik> zawodnicy;
 
-
-    public static void main(String[] args) {
-
-    }
-
     public Druzyna(String nazwaKlubu) {
         this.nazwa = nazwaKlubu;
         this.zawodnicy = new ArrayList<>();
