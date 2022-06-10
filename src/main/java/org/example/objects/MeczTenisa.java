@@ -62,6 +62,14 @@ public class MeczTenisa extends Mecz {
         return zagraniaKonczace;
     }
 
+    public Map<Druzyna, Integer> getPunkty() {
+        return punkty;
+    }
+
+    public Map<Druzyna, Integer> getAsy() {
+        return asy;
+    }
+
     @Override
     public String pickWinner() {
         if (punkty.get(getDruzyna1()) == punkty.get(getDruzyna2())) return "Remis";

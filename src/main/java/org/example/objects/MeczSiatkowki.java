@@ -32,6 +32,26 @@ public class MeczSiatkowki extends Mecz {
         this.bledyBlokujac = MiscUtils.randomValuesOfDruzyny(druzyny);
     }
 
+    public Map<Druzyna, Integer> getPunkty() {
+        return punkty;
+    }
+
+    public Map<Druzyna, Integer> getBloki() {
+        return bloki;
+    }
+
+    public Map<Druzyna, Integer> getChallenge() {
+        return challenge;
+    }
+
+    public Map<Druzyna, Integer> getBledyAtakujac() {
+        return bledyAtakujac;
+    }
+
+    public Map<Druzyna, Integer> getBledyBlokujac() {
+        return bledyBlokujac;
+    }
+
     @Override
     public String pickWinner() {
         if (punkty.get(getDruzyna1()) == punkty.get(getDruzyna2())) return "Remis";

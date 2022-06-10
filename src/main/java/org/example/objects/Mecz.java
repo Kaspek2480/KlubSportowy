@@ -38,13 +38,21 @@ public class Mecz implements MeczStats {
         return nazwaMeczu + " | " + dataMeczu;
     }
 
+    /**
+     *
+     * @return podstawowe informacje o meczu, zawiera nazwę meczu i datę meczu
+     */
     @Override
     public String pickWinner() {
         System.err.println("Invoked on basic Mecz object");
         return null;
     }
 
-
+    /**
+     *
+     * @return podstawowe informacje o meczu, w klasach które dziedziczą z klasy bazowej
+     * zwracane są również dokładne informacje o meeczu
+     */
     @Override
     public String detailedStats() {
         return basicInfo();
